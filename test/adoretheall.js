@@ -8,13 +8,17 @@ contract("Adoretheall", accounts => {
     AdoretheallInstance = await Adoretheall.deployed();
   });
 
-  it("... should return setBaseURI status", async () => {
-    const cid = "Qmdk7BW1MTzSN9qnYZg9DQx3x4PVsb3dtVQE2FUnW58UxJ";
-    const result = await AdoretheallInstance.setBaseURI(cid);
-    assert.equal(result.receipt.status, true, "not return baseURL");
+  it("... should return setBaseURI", async () => {
+    const baseUrl = await AdoretheallInstance._baseURI();
+    assert.equal(baseUrl,"HIDDENURL", "return not hiddenCid")
+    const baseUrlChange = await AdoretheallInstance.setBlindBoxOpened(true);
+    console.log(baseUrlChange);
+    alert(baseUrlChange);
+    const baseUrlChanged = await AdoretheallInstance._baseURI();
+    assert.equal(baseUrl,"BASEURL", "return not cid")
   })
   
-  context("... mint single nft",async () => {
+  xcontext("... mint single nft",async () => {
     it("mint a token", async () => {
 
     })

@@ -12,26 +12,33 @@ contract Adoretheall is ERC721Enumerable, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIds;
-    // The max number of NFTs in the collection
     uint public constant MAX_SUPPLY = 6666;
-    // The mint price for the collection
     uint public constant PRICE = 0.01 ether;
-    // The max number of mints per wallet
     uint public constant MAX_PER_MINT = 1;
-
+    bool public BLIND_BOX_OPENED = false;
     string public baseTokenURI;
+    string private hiddenTokenURI;
 
-    constructor(string memory baseURI, string memory name, string memory symbol) ERC721(name, symbol) {
-        setBaseURI(baseURI);
+    
+    constructor(string memory baseURI, string memory hiddenBaseUrl, string memory name, string memory symbol) ERC721(name, symbol) {
+        setBaseURI(baseURI, hiddenBaseUrl);
     }
-
 
     function _baseURI() internal view virtual override returns (string memory) {
-        return baseTokenURI;
+        if(BLIND_BOX_OPENED){
+            return baseTokenURI;
+        }else{
+            return hiddenTokenURI;
+        }
     }
 
-    function setBaseURI(string memory _baseTokenURI) public onlyOwner {
+    function setBaseURI(string memory _baseTokenURI,string memory _hiddenBaseUrl) public onlyOwner {
         baseTokenURI = _baseTokenURI;
+        hiddenTokenURI = _hiddenBaseUrl;
+    }
+
+    function setBlindBoxOpened(bool _blindBoxOpened) public onlyOwner {
+        BLIND_BOX_OPENED = _blindBoxOpened;
     }
 
     function mintNFTs(uint _count) public payable {
@@ -52,7 +59,6 @@ contract Adoretheall is ERC721Enumerable, Ownable {
         _tokenIds.increment();
     }
     
-    // Returns the ids of the NFTs owned by the wallet address
     function tokensOfOwner(address _owner) external view returns (uint[] memory) {
         uint tokenCount = balanceOf(_owner);
         uint[] memory tokensId = new uint256[](tokenCount);
@@ -63,7 +69,6 @@ contract Adoretheall is ERC721Enumerable, Ownable {
         return tokensId;
     }
     
-    // Withdraw the ether in the contract
     function withdraw() public payable onlyOwner {
         uint balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw");
@@ -72,7 +77,6 @@ contract Adoretheall is ERC721Enumerable, Ownable {
         require(success, "Transfer failed.");
     }
 
-    // Reserve NFTs only for owner to mint for free
     function reserveNFTs(uint _count) public onlyOwner {
         uint totalMinted = _tokenIds.current();
 

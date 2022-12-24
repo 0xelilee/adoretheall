@@ -1,4 +1,9 @@
-const path = require("path");
+const { readFileSync } = require('fs')
+const path = require('path')
+const { join } = require('path')
+const HDWalletProvider = require("truffle-hdwallet-provider");
+var mnemonic = "own two three ...";
+
 module.exports = {
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
@@ -19,6 +24,12 @@ module.exports = {
           return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey);
       },
       network_id: '9545242630824'
+    },
+    goerli: {
+      provider: function () {
+        return new HDWalletProvider(mnemonic, "https://rpc.ankr.com/eth_goerli")
+      },
+      network_id: 5
     }
   },
   

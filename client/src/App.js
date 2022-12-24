@@ -3,14 +3,13 @@ import Web3 from 'web3';
 import "./App.css";
 import { useEffect, useState } from 'react';
 import './App.css';
-import contract from './contracts/NFTCollection.json';
+import contract from './contracts/Adoretheall.json';
 
 function App() {
 
   const [currentAccount, setCurrentAccount] = useState(null);
   const checkWalletIsConnected = async () => {
     const { ethereum } = window;
-
     if (!ethereum) {
       console.log("Make sure you have Metamask installed!");
       return;

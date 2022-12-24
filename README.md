@@ -1,16 +1,22 @@
-# adoretheall_club
-This is a solidty program on Ethereum 
+# ADORETHEALL CLUB
+This is a NFT project on Ethereum 
 
-# install dependencies
+# NFT Box
+Node.js 10.x ^
+NPM 5.2 ^
+Windows、Linux、 MacOS
+
+# INSTRALL
+npx truffle unbox nft-box
+
+npm install @openzeppelin/contracts
+
+# TRUFFLE DEVELOP
+compile
+migrate
+
+# NPM RUN SATRT
+cd client
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
+npm run start
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
