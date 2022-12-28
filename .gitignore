@@ -23,8 +23,6 @@
 *.env
 
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 client/src/contracts
 !client/src/contracts/NFTCollection.json
