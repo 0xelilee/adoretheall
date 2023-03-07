@@ -12,38 +12,43 @@ contract Adoretheall is ERC721Enumerable, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIds;
-    uint public constant MAX_SUPPLY = 6666;
-    uint public constant PRICE = 0.01 ether;
+    uint public constant MAX_SUPPLY = 20;
+    uint public constant PRICE = 0.0001 ether;
     uint public constant MAX_PER_MINT = 1;
-    bool public BLIND_BOX_OPENED = false;
+    bool public paused = true;
+    bool public revealed =true;
     string public baseTokenURI;
-    string private hiddenTokenURI;
+    string public hiddenTokenURI;
 
-    
-    constructor(string memory baseURI, string memory hiddenBaseUrl, string memory name, string memory symbol) ERC721(name, symbol) {
-        setBaseURI(baseURI, hiddenBaseUrl);
+    constructor(string memory baseURI, string memory hiddenURI, string memory name, string memory symbol) ERC721(name, symbol) {
+        setBaseURI(baseURI, hiddenURI);
     }
 
     function _baseURI() internal view virtual override returns (string memory) {
-        if(BLIND_BOX_OPENED){
-            return baseTokenURI;
-        }else{
+        if(revealed == true){
             return hiddenTokenURI;
+        }else{
+            return baseTokenURI;
         }
     }
 
-    function setBaseURI(string memory _baseTokenURI,string memory _hiddenBaseUrl) public onlyOwner {
+    function setBaseURI(string memory _baseTokenURI, string memory _hiddenTokenURI) public onlyOwner {
         baseTokenURI = _baseTokenURI;
-        hiddenTokenURI = _hiddenBaseUrl;
+        hiddenTokenURI = _hiddenTokenURI;
     }
 
-    function setBlindBoxOpened(bool _blindBoxOpened) public onlyOwner {
-        BLIND_BOX_OPENED = _blindBoxOpened;
+    function pause(bool _paused) public onlyOwner {
+        paused = _paused;
+    } 
+
+    function reveal(bool _reveal) public onlyOwner {
+        revealed = _reveal;
     }
 
     function mintNFTs(uint _count) public payable {
-        uint totalMinted = _tokenIds.current();
 
+        uint totalMinted = _tokenIds.current();
+        require(!paused, "This collection is not start");
         require(totalMinted.add(_count) <= MAX_SUPPLY, "This collection is sold out!");
         require(_count >0 && _count <= MAX_PER_MINT, "You have received the maximum amount of NFTs allowed.");
         require(msg.value >= PRICE.mul(_count), "Not enough ether to purchase NFTs.");
