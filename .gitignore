@@ -27,3 +27,4 @@ npm-debug.log*
 
 client/src/contracts
 !client/src/contracts/NFTCollection.json
+contracts/Izuki

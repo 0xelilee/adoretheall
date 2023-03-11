@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config()
 const { readFileSync } = require('fs')
 const path = require('path')
 const { join } = require('path')
@@ -15,13 +16,13 @@ module.exports = {
       provider: function () {
         return new HDWalletProvider(process.env.MNEMONIC, 'https://goerli.infura.io/v3/' + process.env.INFURA_API_KEY)
       },
-      network_id: 5
+      network_id: 5,
     },
     mainnet: {
       provider: function () {
         return new HDWalletProvider(process.env.MNEMONIC, 'https://mainnet.infura.io/v3'+ process.env.INFURA_API_KEY)
       },
-      network_id: 1
+      network_id: 1,
     }
   },
   mocha: {},
@@ -32,5 +33,16 @@ module.exports = {
   },
   db: {
     enabled: false
+  },
+
+  //verify contract
+  plugins: ['truffle-plugin-verify'],
+
+  //config api_key
+  api_keys: {
+    etherscan: process.env.ADORETHEALL,
+    optimistic_etherscan: process.env.INFURA_API_KEY,
+    arbiscan: process.env.INFURA_API_KEY,
+    bscscan: process.env.INFURA_API_KEY,
   }
 };
