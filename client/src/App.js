@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import Web3 from 'web3';
 import "./App.css";
 import { useEffect, useState } from 'react';
-import './App.css';
 import contract from './contracts/Adoretheall.json';
+const dotenv = require('dotenv').config()
 
 function App() {
-
   const [currentAccount, setCurrentAccount] = useState(null);
   const checkWalletIsConnected = async () => {
     const { ethereum } = window;
@@ -57,15 +56,17 @@ function App() {
         const accounts = await web3.eth.getAccounts();
 
         console.log("Network: ", await web3.eth.net.getId());
-        const contractAddress = contract.networks[await web3.eth.net.getId()].address;
+        //const contractAddress = contract.networks[await web3.eth.net.getId()].address;
         const abi = contract.abi;
 
         // Create a contract instance
-        const nftContract = new web3.eth.Contract(abi, contractAddress);
+        const nftContract = new web3.eth.Contract(abi, process.env.CONTRACTADD);
         console.log(nftContract);
+        console.log(process.env.CONTRACTADD);
+
         console.log("Initialize payment");
 
-        let nftTxn = await nftContract.methods.mintNFTs(1).send({ from: accounts[0], value: web3.utils.toWei("0.0001", "ether") }).on('receipt', function () {
+        let nftTxn = await nftContract.methods.mintNFTS(1).send({ from: accounts[0], value: web3.utils.toWei("0.009", "ether") }).on('receipt', function () {
           console.log('receipt')
         });
 

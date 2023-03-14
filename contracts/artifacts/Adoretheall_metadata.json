@@ -14,11 +14,6 @@
 					},
 					{
 						"internalType": "string",
-						"name": "hiddenURI",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
 						"name": "name",
 						"type": "string"
 					},
@@ -344,12 +339,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "hiddenTokenURI",
+				"name": "initiate",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "bool",
 						"name": "",
-						"type": "string"
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -441,7 +436,7 @@
 				"inputs": [
 					{
 						"internalType": "bool",
-						"name": "_paused",
+						"name": "_initiate",
 						"type": "bool"
 					}
 				],
@@ -452,32 +447,13 @@
 			},
 			{
 				"inputs": [],
-				"name": "paused",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "renounceOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "_reveal",
-						"type": "bool"
-					}
-				],
+				"inputs": [],
 				"name": "reveal",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -570,11 +546,6 @@
 					{
 						"internalType": "string",
 						"name": "_baseTokenURI",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_hiddenTokenURI",
 						"type": "string"
 					}
 				],
@@ -837,7 +808,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/adoretheall.sol": "adoretheall"
+			"contracts/adoretheall.sol": "Adoretheall"
 		},
 		"evmVersion": "paris",
 		"libraries": {},
@@ -884,11 +855,11 @@
 			]
 		},
 		"contracts/adoretheall.sol": {
-			"keccak256": "0xfdda7ee485fd9e0b89abfdf389abeccd49cbdda55183270cb2e938ec148fc025",
+			"keccak256": "0xaa4e8c4cba1f369b1150cf51d4748533208b5d2f77f3d7063583bef938fc859d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bb93d7e229ff1282afae0bb489212a64ec757cca29a1c77f9a290fb6bb0b8ebb",
-				"dweb:/ipfs/QmUXSoC589bSfX81A6dUVpLgaD5wY32rf9fS6uENVmM8n8"
+				"bzz-raw://16b4a32ab9a501d48188854b55295f8b6b9f00d82cd8e1005764f051d074ed97",
+				"dweb:/ipfs/QmY1tp4Jr4bgod2HzrJRYKH8LgvtghrZ85ZMDirgRJjQLg"
 			]
 		},
 		"erc721a/contracts/ERC721A.sol": {
