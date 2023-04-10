@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/truffle-box/nft-box#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.13",
     "@openzeppelin/contracts": "^4.5.0",
     "dotenv": "^16.0.3",
     "truffle": "^5.7.1",
